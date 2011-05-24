@@ -88,10 +88,7 @@
             },
 
             removeCompleted: function (event) {
-                var completed = viewModel.todos().filter(function (el) {
-                    return el.done() === true;
-                });
-                viewModel.todos.removeAll(completed);
+                viewModel.todos.removeAll(viewModel.done());
             }
         };
 
