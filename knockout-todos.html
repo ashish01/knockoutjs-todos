@@ -42,7 +42,7 @@
       <li>
         <div data-bind="attr: { class : done() ? 'todo done' : 'todo'}">
           <div class="display">
-            <input class="check" type="checkbox" data-bind="value: done" />
+            <input class="check" type="checkbox" data-bind="checked: done" />
             <div class="todo-content" data-bind="text: content"></div>
             <span class="todo-destroy" data-bind="click: viewModel.remove"></span>
           </div>
@@ -69,7 +69,7 @@
         var Todo = function (text) {
             this.content = ko.observable(text);
             this.order = ko.observable();
-            this.done = ko.observable("");
+            this.done = ko.observable(false);
         }
 
         var viewModel = {
@@ -97,13 +97,13 @@
 
         viewModel.remaining = ko.dependentObservable(function () {
             return this.todos().filter(function (el) {
-                return el.done() === "";
+                return el.done() === false;
             });
         }, viewModel),
 
       viewModel.done = ko.dependentObservable(function () {
           return this.todos().filter(function (el) {
-              return el.done() !== "";
+              return el.done() === true;
           });
       }, viewModel),
 
